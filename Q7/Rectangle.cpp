@@ -1,7 +1,5 @@
 #include "Rectangle.h"
 
-// WRITE YOUR CODE HERE. DO NOT CHANGE THE TEMPLATE
-
 // Default constructor
 Rectangle::Rectangle() {
     width = 1;
@@ -15,28 +13,13 @@ Rectangle::Rectangle(double w, double h) {
 }
 
 // Accessors
-double Rectangle::getWidth() const {
-    return width;
-}
-
-double Rectangle::getHeight() const {
-    return height;
-}
+double Rectangle::getWidth() const { return width; }
+double Rectangle::getHeight() const { return height; }
 
 // Mutators
-void Rectangle::setWidth(double w) {
-    width = w;
-}
-
-void Rectangle::setHeight(double h) {
-    height = h;
-}
+void Rectangle::setWidth(double w) { width = w; }
+void Rectangle::setHeight(double h) { height = h; }
 
 // Member functions
-double Rectangle::getArea() const {
-    return width * height;
-}
-
-double Rectangle::getPerimeter() const {
-    return 2 * (width + height);
-}
+double Rectangle::getArea() const { return width * height; }
+double Rectangle::getPerimeter() const { return 2 * (width + height); }

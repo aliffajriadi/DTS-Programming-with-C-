@@ -1,20 +1,14 @@
 #include "Rectangle2D.h"
-
-// WRITE YOUR CODE HERE. DO NOT CHANGE THE TEMPLATE
+#include <iostream>
+using namespace std;
 
 // Constructors
 Rectangle2D::Rectangle2D() {
-    x = 0;
-    y = 0;
-    width = 1;
-    height = 1;
+    x = 0; y = 0; width = 1; height = 1;
 }
 
 Rectangle2D::Rectangle2D(double x, double y, double width, double height) {
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
+    this->x = x; this->y = y; this->width = width; this->height = height;
 }
 
 // Accessors
@@ -30,53 +24,50 @@ void Rectangle2D::setWidth(double width) { this->width = width; }
 void Rectangle2D::setHeight(double height) { this->height = height; }
 
 // Member functions
-double Rectangle2D::getArea() const {
-    return width * height;
-}
+double Rectangle2D::getArea() const { return width * height; }
+double Rectangle2D::getPerimeter() const { return 2 * (width + height); }
 
-double Rectangle2D::getPerimeter() const {
-    return 2 * (width + height);
-}
-
-// Check if a point is inside the rectangle
 bool Rectangle2D::contains(double px, double py) const {
-    double left = x - width / 2.0;
-    double right = x + width / 2.0;
-    double bottom = y - height / 2.0;
-    double top = y + height / 2.0;
-    return (px > left && px < right && py > bottom && py < top);
+    return (fabs(px - x) <= width / 2 && fabs(py - y) <= height / 2);
 }
 
-// Check if a rectangle is fully inside this rectangle
 bool Rectangle2D::contains(const Rectangle2D &r) const {
-    double left = x - width / 2.0;
-    double right = x + width / 2.0;
-    double bottom = y - height / 2.0;
-    double top = y + height / 2.0;
-
-    double rLeft = r.x - r.width / 2.0;
-    double rRight = r.x + r.width / 2.0;
-    double rBottom = r.y - r.height / 2.0;
-    double rTop = r.y + r.height / 2.0;
-
-    return (rLeft >= left && rRight <= right && rBottom >= bottom && rTop <= top);
+    return (fabs(r.getX() - x) + r.getWidth() / 2 <= width / 2 &&
+            fabs(r.getY() - y) + r.getHeight() / 2 <= height / 2);
 }
 
-// Check if rectangles overlap
 bool Rectangle2D::overlaps(const Rectangle2D &r) const {
-    double left = x - width / 2.0;
-    double right = x + width / 2.0;
-    double bottom = y - height / 2.0;
-    double top = y + height / 2.0;
+    return !(x + width / 2 < r.getX() - r.getWidth() / 2 ||
+             x - width / 2 > r.getX() + r.getWidth() / 2 ||
+             y + height / 2 < r.getY() - r.getHeight() / 2 ||
+             y - height / 2 > r.getY() + r.getHeight() / 2);
+}
 
-    double rLeft = r.x - r.width / 2.0;
-    double rRight = r.x + r.width / 2.0;
-    double rBottom = r.y - r.height / 2.0;
-    double rTop = r.y + r.height / 2.0;
+// ================== MAIN FUNCTION ==================
+int main() {
+    double x1, y1, w1, h1;
+    double x2, y2, w2, h2;
 
-    // Tidak overlap jika satu di luar sisi lainnya
-    if (right <= rLeft || left >= rRight || top <= rBottom || bottom >= rTop)
-        return false;
+    cout << "Enter rectangle 1 (x y width height): ";
+    cin >> x1 >> y1 >> w1 >> h1;
+    Rectangle2D r1(x1, y1, w1, h1);
 
-    return true;
+    cout << "Enter rectangle 2 (x y width height): ";
+    cin >> x2 >> y2 >> w2 >> h2;
+    Rectangle2D r2(x2, y2, w2, h2);
+
+    cout << fixed;
+    cout << "Rectangle 1 area: " << r1.getArea() << endl;
+    cout << "Rectangle 1 perimeter: " << r1.getPerimeter() << endl;
+
+    cout << boolalpha;
+    cout << "r1 contains r2? " << r1.contains(r2) << endl;
+    cout << "r1 overlaps r2? " << r1.overlaps(r2) << endl;
+
+    double px, py;
+    cout << "Enter a point (x y): ";
+    cin >> px >> py;
+    cout << "r1 contains point (" << px << "," << py << ")? " << r1.contains(px, py) << endl;
+
+    return 0;
 }

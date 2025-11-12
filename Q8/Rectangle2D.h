@@ -1,7 +1,5 @@
 #pragma once
-
 #include <cmath>
-
 /**
  * Define the Rectangle2D class that contains:
  *
@@ -22,36 +20,28 @@
  * 9. A constant function overlaps(const Rectangle2D &r) that returns true if
  *    the specified rectangle overlaps with this rectangle.
  */
-
 class Rectangle2D {
-   private:
-    double x, y;  // Center of the rectangle
-    double width, height;
+private:
+    double x, y, width, height;
 
-   public:
-    // No-arg constructor
+public:
     Rectangle2D();
-
-    // Constructor with parameters
     Rectangle2D(double x, double y, double width, double height);
 
-    // Accessors
     double getX() const;
     double getY() const;
     double getWidth() const;
     double getHeight() const;
 
-    // Mutators
     void setX(double x);
     void setY(double y);
     void setWidth(double width);
     void setHeight(double height);
 
-    // Member functions
     double getArea() const;
     double getPerimeter() const;
 
-    bool contains(double x, double y) const;
-    bool contains(const Rectangle2D &r) const;
-    bool overlaps(const Rectangle2D &r) const;
+    bool contains(double px, double py) const;
+    bool contains(const Rectangle2D& r) const;
+    bool overlaps(const Rectangle2D& r) const;
 };

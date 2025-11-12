@@ -4,8 +4,8 @@
 
 const int SIZE = 2;
 
+// Fungsi membuat objek Rectangle2D dari kumpulan titik
 Rectangle2D getRectangle(const double points[][SIZE], int n) {
-    // Cari min dan max koordinat
     double minX = points[0][0], maxX = points[0][0];
     double minY = points[0][1], maxY = points[0][1];
 
@@ -24,6 +24,7 @@ Rectangle2D getRectangle(const double points[][SIZE], int n) {
     return Rectangle2D(centerX, centerY, width, height);
 }
 
+// Fungsi yang return pointer
 Rectangle2D* getRectanglePointer(const double points[][SIZE], int n) {
     double minX = points[0][0], maxX = points[0][0];
     double minY = points[0][1], maxY = points[0][1];
@@ -40,8 +41,7 @@ Rectangle2D* getRectanglePointer(const double points[][SIZE], int n) {
     double centerX = (minX + maxX) / 2.0;
     double centerY = (minY + maxY) / 2.0;
 
-    Rectangle2D* rectPtr = new Rectangle2D(centerX, centerY, width, height);
-    return rectPtr;
+    return new Rectangle2D(centerX, centerY, width, height);
 }
 
 int main() {
